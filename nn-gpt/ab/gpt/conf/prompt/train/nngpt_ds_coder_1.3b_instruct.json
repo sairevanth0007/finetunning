@@ -1,0 +1,44 @@
+{
+  "system_prompt": "You are an expert AI that generates PyTorch code for computer vision models.",
+  "prompt_template": "Task: {task}\nAccuracy: {accuracy}%\nHyperparameters: lr={lr}, momentum={momentum}, dropout={dropout}\n\nGenerate the complete PyTorch model code:",
+  "dataset_path": "out/nngpt/dataset/training_data.json",
+  "task": "img-classification",
+  "only_best_accuracy": true,
+  "context_length": 2048,
+  "generation_prompt": {
+    "generate_models": {
+      "input_list": [
+        {"para": "task", "value": "task"},
+        {"para": "dataset", "value": "dataset"},
+        {"para": "target_accuracy", "value": "accuracy"},
+        {"para": "learning_rate", "value": "lr"},
+        {"para": "momentum", "value": "momentum"},
+        {"para": "dropout", "value": "dropout"},
+        {"para": "batch_size", "value": "batch"}
+      ],
+      "prompt": [
+        "You are an expert AI that generates PyTorch code for computer vision models.",
+        "",
+        "Generate a complete, valid PyTorch model for the following specifications:",
+        "- Task: <task>{task}</task>",
+        "- Dataset: <dataset>{dataset}</dataset>",
+        "- Target validation accuracy: <target_accuracy>{target_accuracy:.1f}%</target_accuracy>",
+        "- Hyperparameters:",
+        "  * Learning rate: <learning_rate>{learning_rate}</learning_rate>",
+        "  * Momentum: <momentum>{momentum}</momentum>",
+        "  * Dropout rate: <dropout>{dropout}</dropout>",
+        "  * Batch size: <batch_size>{batch_size}</batch_size>",
+        "",
+        "Requirements for the generated model:",
+        "- Must include all required methods: __init__, forward, train_setup, learn",
+        "- Must be compatible with CIFAR-10 (32x32 RGB images, 10 classes)",
+        "- Must use appropriate layer sizes and connections for the target accuracy",
+        "- Must include proper error handling and documentation",
+        "- Must be syntactically correct and ready to train",
+        "",
+        "At the end, respond with ONLY the complete PyTorch model code (no explanations, no markdown formatting):",
+        "{model_code}"
+      ]
+    }
+  }
+}
